@@ -5,6 +5,10 @@ namespace csharp
     public class GildedRose
     {
         IList<Item> Items;
+
+        private const int MaxQuality = 50;
+        private const int MinQuality = 0;
+        
         public GildedRose(IList<Item> Items)
         {
             this.Items = Items;
@@ -17,15 +21,7 @@ namespace csharp
                 const string agedBrie = "Aged Brie";
                 const string backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
                 const string sulfuras = "Sulfuras, Hand of Ragnaros";
-
-                var itemIsNotAgedBrie = item.Name != agedBrie;
-                var itemIsNotBackstagePasses = item.Name != backstagePasses;
-
-                var isNotBackstagePassesAndAgedBrie = itemIsNotAgedBrie && itemIsNotBackstagePasses;
-
-                var isQualityGreaterThanZero = item.Quality > 0;
-                var isQualityLowerThanFifty = item.Quality < 50;
-
+                
                 var itemIsSulfuras = item.Name == sulfuras;
 
                 if (itemIsSulfuras)
@@ -37,14 +33,16 @@ namespace csharp
 
                 if (isItemAgedBrie)
                 {
-                    if (isQualityLowerThanFifty)
+                    if (IsQualityLowerThanMaxQuality(item))
                     {
                         item.Quality += 1;
                     }
                     
-                    if (DecreaseItemSellInAndSkipIfLowerOrEqualThanZero(item)) continue;
+                    DecreaseItemSellIn(item);
                     
-                    if (isQualityLowerThanFifty)
+                    if (IsItemSellable(item)) continue;
+                    
+                    if (IsQualityLowerThanMaxQuality(item))
                     {
                         item.Quality += 1;
                     }
@@ -56,48 +54,70 @@ namespace csharp
 
                 if (isBackStagePass)
                 {
-                    if (isQualityLowerThanFifty)
+                    if (IsQualityLowerThanMaxQuality(item))
                     {
                         item.Quality += 1;
                         
                         var isItemSellInGreaterThanElevenDays = item.SellIn < 11;
-                        if (isItemSellInGreaterThanElevenDays)
+                        if (isItemSellInGreaterThanElevenDays && IsQualityLowerThanMaxQuality(item))
                         {
                             item.Quality += 1;
                         }
 
                         var isItemSellInGreaterThanSixDays = item.SellIn < 6;
-                        if (isItemSellInGreaterThanSixDays)
+                        if (isItemSellInGreaterThanSixDays && IsQualityLowerThanMaxQuality(item))
                         {
                             item.Quality += 1;
                         }
                     }
+
+                    DecreaseItemSellIn(item);
                     
-                    if (DecreaseItemSellInAndSkipIfLowerOrEqualThanZero(item)) continue;
+                    if (IsItemSellable(item)) continue;
                     
-                    item.Quality -= item.Quality;
+                    DropQualityToMinimum(item);
 
                     continue;
                 }
 
-                if (isQualityGreaterThanZero)
+                if (IsQualityGreaterThanMinimumQuality(item))
                 {
                     item.Quality -= 1;
                 }
-
-                if (DecreaseItemSellInAndSkipIfLowerOrEqualThanZero(item)) continue;
                 
-                if (!isQualityGreaterThanZero) continue;
+                DecreaseItemSellIn(item);
+                
+                if (IsItemSellable(item)) continue;
+                
+                if (!IsQualityGreaterThanMinimumQuality(item)) continue;
                     
                 item.Quality -= 1;
 
             }
         }
 
-        private static bool DecreaseItemSellInAndSkipIfLowerOrEqualThanZero(Item item)
+        private static void DropQualityToMinimum(Item item)
+        {
+            item.Quality = MinQuality;
+        }
+
+        private static bool IsQualityGreaterThanMinimumQuality(Item item)
+        {
+            return item.Quality > MinQuality;
+        }
+
+        private static bool IsQualityLowerThanMaxQuality(Item item)
+        {
+            return item.Quality < MaxQuality;
+        }
+
+        private static void DecreaseItemSellIn(Item item)
         {
             item.SellIn -= 1;
+        }
 
+        private static bool IsItemSellable(Item item)
+        {
             return item.SellIn >= 0;
         }
     }

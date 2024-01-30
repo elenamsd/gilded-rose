@@ -134,6 +134,18 @@ namespace csharp
         }
         
         [Test]
+        public void IncreaseBackstagePassQualityByThreeWhenSellInLowerOrEqualThanFiveDaysTest()
+        {
+            var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 49 } };
+            var app = new GildedRose(items);
+            
+            app.UpdateQuality();
+            
+            Assert.AreEqual(50, items[0].Quality);
+            Assert.AreEqual(4, items[0].SellIn);
+        }
+        
+        [Test]
         public void DropBackstagePassQualityToZeroWhenSellInLowerOrEqualThanZeroDays()
         {
             var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 0, Quality = 5 } };
