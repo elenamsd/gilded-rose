@@ -20,21 +20,24 @@ namespace csharp
 
                 var itemIsNotAgedBrie = item.Name != agedBrie;
                 var itemIsNotBackstagePasses = item.Name != backstagePasses;
-                var itemIsNotSulfuras = item.Name != sulfuras;
 
                 var isNotBackstagePassesAndAgedBrie = itemIsNotAgedBrie && itemIsNotBackstagePasses;
 
                 var isQualityGreaterThanZero = item.Quality > 0;
                 var isQualityLowerThanFifty = item.Quality < 50;
 
+                var itemIsSulfuras = item.Name == sulfuras;
+
+                if (itemIsSulfuras)
+                {
+                    continue;
+                }
+
                 if (isNotBackstagePassesAndAgedBrie)
                 {
                     if (isQualityGreaterThanZero)
                     {
-                        if (itemIsNotSulfuras)
-                        {
-                            item.Quality -= 1;
-                        }
+                        item.Quality -= 1;
                     }
                 }
                 else
@@ -60,10 +63,7 @@ namespace csharp
                     }
                 }
 
-                if (itemIsNotSulfuras)
-                {
-                    item.SellIn -= 1;
-                }
+                item.SellIn -= 1;
 
                 if (item.SellIn >= 0) continue;
                 
@@ -73,10 +73,7 @@ namespace csharp
                     {
                         if (!isQualityGreaterThanZero) continue;
                         
-                        if (itemIsNotSulfuras)
-                        {
-                            item.Quality -= 1;
-                        }
+                        item.Quality -= 1;
                     }
                     else
                     {
