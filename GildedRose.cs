@@ -21,78 +21,80 @@ namespace csharp
                 const string agedBrie = "Aged Brie";
                 const string backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
                 const string sulfuras = "Sulfuras, Hand of Ragnaros";
-                
-                var itemIsSulfuras = item.Name == sulfuras;
 
-                if (itemIsSulfuras)
+                switch (item.Name)
                 {
-                    continue;
+                    case sulfuras:
+                        break;
+                    case agedBrie:
+                        HandleAgedBrieCase(item);
+                        break;
+                    case backstagePasses:
+                        HandleBackStagePassCase(item);
+                        break;
+                    default:
+                        HandleRegularItem(item);
+                        break;
                 }
+            }
+        }
 
-                var isItemAgedBrie = item.Name == agedBrie;
-
-                if (isItemAgedBrie)
-                {
-                    if (IsQualityLowerThanMaxQuality(item))
-                    {
-                        item.Quality += 1;
-                    }
-                    
-                    DecreaseItemSellIn(item);
-                    
-                    if (IsItemSellable(item)) continue;
-                    
-                    if (IsQualityLowerThanMaxQuality(item))
-                    {
-                        item.Quality += 1;
-                    }
-
-                    continue;
-                }
-
-                var isBackStagePass = item.Name == backstagePasses;
-
-                if (isBackStagePass)
-                {
-                    if (IsQualityLowerThanMaxQuality(item))
-                    {
-                        item.Quality += 1;
-                        
-                        var isItemSellInGreaterThanElevenDays = item.SellIn < 11;
-                        if (isItemSellInGreaterThanElevenDays && IsQualityLowerThanMaxQuality(item))
-                        {
-                            item.Quality += 1;
-                        }
-
-                        var isItemSellInGreaterThanSixDays = item.SellIn < 6;
-                        if (isItemSellInGreaterThanSixDays && IsQualityLowerThanMaxQuality(item))
-                        {
-                            item.Quality += 1;
-                        }
-                    }
-
-                    DecreaseItemSellIn(item);
-                    
-                    if (IsItemSellable(item)) continue;
-                    
-                    DropQualityToMinimum(item);
-
-                    continue;
-                }
-
-                if (IsQualityGreaterThanMinimumQuality(item))
-                {
-                    item.Quality -= 1;
-                }
-                
-                DecreaseItemSellIn(item);
-                
-                if (IsItemSellable(item)) continue;
-                
-                if (!IsQualityGreaterThanMinimumQuality(item)) continue;
-                    
+        private static void HandleRegularItem(Item item)
+        {
+            if (IsQualityGreaterThanMinimumQuality(item))
+            {
                 item.Quality -= 1;
+            }
+                
+            DecreaseItemSellIn(item);
+                
+            if (IsItemSellable(item)) return;
+                
+            if (!IsQualityGreaterThanMinimumQuality(item)) return;
+                    
+            item.Quality -= 1;
+        }
 
+        private static void HandleBackStagePassCase(Item item)
+        {
+            if (IsQualityLowerThanMaxQuality(item))
+            {
+                item.Quality += 1;
+                        
+                var isItemSellInGreaterThanElevenDays = item.SellIn < 11;
+                if (isItemSellInGreaterThanElevenDays && IsQualityLowerThanMaxQuality(item))
+                {
+                    item.Quality += 1;
+                }
+
+                var isItemSellInGreaterThanSixDays = item.SellIn < 6;
+                if (isItemSellInGreaterThanSixDays && IsQualityLowerThanMaxQuality(item))
+                {
+                    item.Quality += 1;
+                }
+            }
+
+            DecreaseItemSellIn(item);
+                    
+            if (IsItemSellable(item)) return;
+                    
+            DropQualityToMinimum(item);
+        }
+
+        private static void HandleAgedBrieCase(Item item)
+        {
+            if (IsQualityLowerThanMaxQuality(item))
+            {
+                item.Quality += 1;
+            }
+                    
+            DecreaseItemSellIn(item);
+                    
+            if (IsItemSellable(item)) return;
+                    
+            if (IsQualityLowerThanMaxQuality(item))
+            {
+                item.Quality += 1;
             }
         }
 
