@@ -33,6 +33,23 @@ namespace csharp
                     continue;
                 }
 
+                var isItemAgedBrie = item.Name == agedBrie;
+
+                if (isItemAgedBrie)
+                {
+                    if (isQualityLowerThanFifty)
+                    {
+                        item.Quality += 1;
+                    }
+                    
+                    if (DecreaseItemSellInAndSkipIfLowerOrEqualThanZero(item)) continue;
+                    
+                    if (isQualityLowerThanFifty)
+                    {
+                        item.Quality += 1;
+                    }
+                }
+
                 if (isNotBackstagePassesAndAgedBrie)
                 {
                     if (isQualityGreaterThanZero)
@@ -63,31 +80,27 @@ namespace csharp
                     }
                 }
 
-                item.SellIn -= 1;
-
-                if (item.SellIn >= 0) continue;
+                if (DecreaseItemSellInAndSkipIfLowerOrEqualThanZero(item)) continue;
                 
-                if (itemIsNotAgedBrie)
+                if (itemIsNotBackstagePasses)
                 {
-                    if (itemIsNotBackstagePasses)
-                    {
-                        if (!isQualityGreaterThanZero) continue;
+                    if (!isQualityGreaterThanZero) continue;
                         
-                        item.Quality -= 1;
-                    }
-                    else
-                    {
-                        item.Quality -= item.Quality;
-                    }
+                    item.Quality -= 1;
                 }
                 else
                 {
-                    if (isQualityLowerThanFifty)
-                    {
-                        item.Quality += 1;
-                    }
+                    item.Quality -= item.Quality;
                 }
+
             }
+        }
+
+        private static bool DecreaseItemSellInAndSkipIfLowerOrEqualThanZero(Item item)
+        {
+            item.SellIn -= 1;
+
+            return item.SellIn >= 0;
         }
     }
 }
