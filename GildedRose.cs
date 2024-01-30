@@ -48,50 +48,48 @@ namespace csharp
                     {
                         item.Quality += 1;
                     }
+
+                    continue;
                 }
 
-                if (isNotBackstagePassesAndAgedBrie)
-                {
-                    if (isQualityGreaterThanZero)
-                    {
-                        item.Quality -= 1;
-                    }
-                }
-                else
+                var isBackStagePass = item.Name == backstagePasses;
+
+                if (isBackStagePass)
                 {
                     if (isQualityLowerThanFifty)
                     {
                         item.Quality += 1;
-
-                        if (item.Name == backstagePasses)
+                        
+                        var isItemSellInGreaterThanElevenDays = item.SellIn < 11;
+                        if (isItemSellInGreaterThanElevenDays)
                         {
-                            var isItemSellInGreaterThanElevenDays = item.SellIn < 11;
-                            if (isItemSellInGreaterThanElevenDays)
-                            {
-                                item.Quality += 1;
-                            }
+                            item.Quality += 1;
+                        }
 
-                            var isItemSellInGreaterThanSixDays = item.SellIn < 6;
-                            if (isItemSellInGreaterThanSixDays)
-                            {
-                                item.Quality += 1;
-                            }
+                        var isItemSellInGreaterThanSixDays = item.SellIn < 6;
+                        if (isItemSellInGreaterThanSixDays)
+                        {
+                            item.Quality += 1;
                         }
                     }
+                    
+                    if (DecreaseItemSellInAndSkipIfLowerOrEqualThanZero(item)) continue;
+                    
+                    item.Quality -= item.Quality;
+
+                    continue;
+                }
+
+                if (isQualityGreaterThanZero)
+                {
+                    item.Quality -= 1;
                 }
 
                 if (DecreaseItemSellInAndSkipIfLowerOrEqualThanZero(item)) continue;
                 
-                if (itemIsNotBackstagePasses)
-                {
-                    if (!isQualityGreaterThanZero) continue;
-                        
-                    item.Quality -= 1;
-                }
-                else
-                {
-                    item.Quality -= item.Quality;
-                }
+                if (!isQualityGreaterThanZero) continue;
+                    
+                item.Quality -= 1;
 
             }
         }
