@@ -2,37 +2,18 @@ using csharp.Polymorphism.Models;
 
 namespace csharp.polymorphism.Models;
 
-public abstract class ItemWrapper: IUpdateItemQuality
+public abstract class ItemWrapper: IUpdateQualityStrategy
 {
-    public Item Item { get; set; }
-    
-    private const int MaxQuality = 50;
-    private const int MinQuality = 0;
-    
-    protected static void DropQualityToMinimum(Item item)
+    public Item Item { get; init; }
+    private IUpdateQualityStrategy _updateStrategy;
+
+    protected ItemWrapper(IUpdateQualityStrategy updateStrategy)
     {
-        item.Quality = MinQuality;
+        _updateStrategy = updateStrategy;
     }
 
-    protected static bool IsQualityGreaterThanMinimumQuality(Item item)
+    public virtual void UpdateQuality(Item item)
     {
-        return item.Quality > MinQuality;
+        _updateStrategy?.UpdateQuality(item);
     }
-
-    protected static bool IsQualityLowerThanMaxQuality(Item item)
-    {
-        return item.Quality < MaxQuality;
-    }
-
-    protected static void DecreaseItemSellIn(Item item)
-    {
-        item.SellIn -= 1;
-    }
-
-    protected static bool IsItemSellable(Item item)
-    {
-        return item.SellIn >= 0;
-    }
-
-    public abstract void UpdateQuality();
 }

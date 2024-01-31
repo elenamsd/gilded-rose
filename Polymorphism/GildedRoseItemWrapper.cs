@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using csharp.polymorphism.Models;
+using csharp.Polymorphism.Strategy;
 
 namespace csharp.Polymorphism;
 
@@ -14,15 +15,15 @@ public class GildedRoseItemWrapper
             const string agedBrie = "Aged Brie";
             const string backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
             const string sulfuras = "Sulfuras, Hand of Ragnaros";
-            ItemWrapper itemToAdd = item.Name switch
+            ItemWrapper toAdd = item.Name switch
             {
                 sulfuras => new Sulfuras(),
-                agedBrie => new AgedBrie() { Item = item },
-                backstagePasses => new BackstagePass() { Item = item },
+                agedBrie => new AgedBrie { Item = item },
+                backstagePasses => new BackstagePass { Item = item },
                 _ => new Regular { Item = item }
             };
 
-            _items.Add(itemToAdd);
+            _items.Add(toAdd);
         }
     }
 
@@ -30,7 +31,7 @@ public class GildedRoseItemWrapper
     {
         foreach (var item in _items)
         {
-            item.UpdateQuality();
+            item.UpdateQuality(item.Item);
         }
     }
 }

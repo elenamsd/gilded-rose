@@ -1,11 +1,11 @@
+using csharp.Polymorphism.Models;
+using csharp.Polymorphism.Strategy;
+
 namespace csharp.polymorphism.Models;
 
 public class Sulfuras:  ItemWrapper
 {
-    public override void UpdateQuality()
+    public Sulfuras() : base(new SulfurasUpdateStrategy())
     {
-        /**
-         * do nothing
-         */
     }
 }
