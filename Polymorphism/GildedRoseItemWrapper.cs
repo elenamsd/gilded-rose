@@ -12,18 +12,25 @@ public class GildedRoseItemWrapper
     {
         foreach (var item in items)
         {
-            const string agedBrie = "Aged Brie";
-            const string backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
-            const string sulfuras = "Sulfuras, Hand of Ragnaros";
-            ItemWrapper toAdd = item.Name switch
+            if (item.Name.Contains("conjured", System.StringComparison.CurrentCultureIgnoreCase))
             {
-                sulfuras => new Sulfuras(),
-                agedBrie => new AgedBrie { Item = item },
-                backstagePasses => new BackstagePass { Item = item },
-                _ => new Regular { Item = item }
-            };
+                _items.Add(new Conjured() { Item = item });
+            }
 
-            _items.Add(toAdd);
+            else {
+                const string agedBrie = "Aged Brie";
+                const string backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
+                const string sulfuras = "Sulfuras, Hand of Ragnaros";
+                ItemWrapper itemToAdd = item.Name switch
+                {
+                    sulfuras => new Sulfuras(),
+                    agedBrie => new AgedBrie() { Item = item },
+                    backstagePasses => new BackstagePass() { Item = item },
+                    _ => new Regular { Item = item }
+                };
+
+                _items.Add(itemToAdd);
+            }
         }
     }
 

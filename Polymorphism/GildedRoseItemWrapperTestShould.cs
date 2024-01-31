@@ -157,5 +157,16 @@ public class GildedRoseItemWrapperTestShould
             Assert.AreEqual(0, items[0].Quality);
             Assert.AreEqual(-1, items[0].SellIn);
         }
+        
+        [Test]
+        public void DecreaseQualityOfConjuredItemsTwiceFaster()
+        {
+            var items = new List<Item> { new Item { Name = "Conjured Mana Cake", SellIn = 4, Quality = 5 } };
+            var app = new GildedRoseItemWrapper(items);
+            
+            app.UpdateQuality();
+            
+            Assert.AreEqual(3, items[0].Quality);
+        }
     
 }
