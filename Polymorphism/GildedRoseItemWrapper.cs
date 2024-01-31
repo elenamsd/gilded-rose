@@ -12,6 +12,7 @@ public class GildedRoseItemWrapper
     {
         foreach (var item in items)
         {
+            
             if (item.Name.Contains("conjured", System.StringComparison.CurrentCultureIgnoreCase))
             {
                 _items.Add(new Conjured() { Item = item });
