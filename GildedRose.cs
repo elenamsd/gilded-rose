@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
+using csharp.polymorphism.Models;
 
 namespace csharp
 {
     public class GildedRose
     {
-        IList<Item> Items;
-
-        private const int MaxQuality = 50;
-        private const int MinQuality = 0;
+        private IList<Item> Items;
         
         public GildedRose(IList<Item> Items)
         {
@@ -18,6 +16,7 @@ namespace csharp
         {
             foreach (var item in Items)
             {
+                
                 const string agedBrie = "Aged Brie";
                 const string backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
                 const string sulfuras = "Sulfuras, Hand of Ragnaros";
@@ -25,21 +24,44 @@ namespace csharp
                 switch (item.Name)
                 {
                     case sulfuras:
+                        var sulfurasItem = new Sulfuras();
+                        sulfurasItem.UpdateQuality();
                         break;
                     case agedBrie:
-                        HandleAgedBrieCase(item);
+                        var brie = new AgedBrie
+                        {
+                            Item = item
+                        };
+                        brie.UpdateQuality();
+                        item.Name = brie.Item.Name;
+                        item.SellIn = brie.Item.SellIn;
+                        item.Quality = brie.Item.Quality;
                         break;
                     case backstagePasses:
-                        HandleBackStagePassCase(item);
+                        var backstagePass = new BackstagePass
+                        {
+                            Item = item
+                        };
+                        backstagePass.UpdateQuality();
+                        item.Name = backstagePass.Item.Name;
+                        item.SellIn = backstagePass.Item.SellIn;
+                        item.Quality = backstagePass.Item.Quality;
                         break;
                     default:
-                        HandleRegularItem(item);
+                        var regular = new Regular
+                        {
+                            Item = item
+                        };
+                        regular.UpdateQuality();
+                        item.Name = regular.Item.Name;
+                        item.SellIn = regular.Item.SellIn;
+                        item.Quality = regular.Item.Quality;
                         break;
                 }
             }
         }
 
-        private static void HandleRegularItem(Item item)
+        /*private static void HandleRegularItem(Item item)
         {
             if (IsQualityGreaterThanMinimumQuality(item))
             {
@@ -121,6 +143,6 @@ namespace csharp
         private static bool IsItemSellable(Item item)
         {
             return item.SellIn >= 0;
-        }
+        }*/
     }
 }
