@@ -12,27 +12,34 @@ public class GildedRoseItemWrapper
     {
         foreach (var item in items)
         {
+            bool isConjuredItem = item.Name.Contains("conjured", System.StringComparison.CurrentCultureIgnoreCase);
             
-            if (item.Name.Contains("conjured", System.StringComparison.CurrentCultureIgnoreCase))
+            if (isConjuredItem)
             {
                 _items.Add(new Conjured() { Item = item });
+                continue;
             }
+          
+            var itemToAdd = CreateWrappedItemFromItem(item);
 
-            else {
-                const string agedBrie = "Aged Brie";
-                const string backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
-                const string sulfuras = "Sulfuras, Hand of Ragnaros";
-                ItemWrapper itemToAdd = item.Name switch
-                {
-                    sulfuras => new Sulfuras(),
-                    agedBrie => new AgedBrie() { Item = item },
-                    backstagePasses => new BackstagePass() { Item = item },
-                    _ => new Regular { Item = item }
-                };
-
-                _items.Add(itemToAdd);
-            }
+            _items.Add(itemToAdd);
+            
         }
+    }
+
+    private static ItemWrapper CreateWrappedItemFromItem(Item item)
+    {
+        const string agedBrie = "Aged Brie";
+        const string backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
+        const string sulfuras = "Sulfuras, Hand of Ragnaros";
+        ItemWrapper itemToAdd = item.Name switch
+        {
+            sulfuras => new Sulfuras(),
+            agedBrie => new AgedBrie() { Item = item },
+            backstagePasses => new BackstagePass() { Item = item },
+            _ => new Regular { Item = item }
+        };
+        return itemToAdd;
     }
 
     public void UpdateQuality()

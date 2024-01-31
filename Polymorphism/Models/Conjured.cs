@@ -1,21 +1,10 @@
-namespace csharp.polymorphism.Models;
+using csharp.Polymorphism.Strategy;
 
+namespace csharp.polymorphism.Models;
 public class Conjured: ItemWrapper
 {
-    public override void UpdateQuality()
+    public Conjured() : base(new ConjuredUpdateStrategy())
     {
-        if (IsQualityGreaterThanMinimumQuality(Item))
-        {
-            Item.Quality -= 2;
-        }
-                
-        DecreaseItemSellIn(Item);
-                
-        if (IsItemSellable(Item)) return;
-                
-        if (!IsQualityGreaterThanMinimumQuality(Item)) return;
-                    
-        Item.Quality -= 2;
     }
     
 }
