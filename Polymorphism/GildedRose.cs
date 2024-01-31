@@ -4,11 +4,11 @@ using csharp.Polymorphism.Strategy;
 
 namespace csharp.Polymorphism;
 
-public class GildedRoseItemWrapper
+public class GildedRose
 {
     private readonly IList<ItemWrapper> _items = [];
 
-    public GildedRoseItemWrapper(IList<Item> items)
+    public GildedRose(IList<Item> items)
     {
         foreach (var item in items)
         {
