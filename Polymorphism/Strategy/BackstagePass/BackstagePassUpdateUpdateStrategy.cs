@@ -1,6 +1,4 @@
-using csharp.Polymorphism.Models;
-
-namespace csharp.Polymorphism.Strategy;
+namespace csharp.Polymorphism.Strategy.BackstagePass;
 
 public class BackstagePassUpdateUpdateStrategy : BaseUpdateStrategy
 {

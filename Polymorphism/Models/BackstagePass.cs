@@ -1,5 +1,4 @@
-using csharp.Polymorphism.Models;
-using csharp.Polymorphism.Strategy;
+using csharp.Polymorphism.Strategy.BackstagePass;
 
 namespace csharp.polymorphism.Models;
 

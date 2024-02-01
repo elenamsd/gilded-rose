@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace csharp.Polymorphism.Strategy;
+namespace csharp.Polymorphism.Strategy.BackstagePass;
 
 [TestFixture]
 public class BackstagePassUpdateStrategyTestShould

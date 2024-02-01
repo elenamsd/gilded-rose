@@ -1,4 +1,4 @@
-using csharp.Polymorphism.Strategy;
+using csharp.Polymorphism.Strategy.Regular;
 
 namespace csharp.polymorphism.Models;
 

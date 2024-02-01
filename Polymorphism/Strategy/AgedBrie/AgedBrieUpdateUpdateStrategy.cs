@@ -1,6 +1,4 @@
-using csharp.Polymorphism.Models;
-
-namespace csharp.Polymorphism.Strategy;
+namespace csharp.Polymorphism.Strategy.AgedBrie;
 
 public class AgedBrieUpdateUpdateStrategy : BaseUpdateStrategy
 {
@@ -8,14 +6,8 @@ public class AgedBrieUpdateUpdateStrategy : BaseUpdateStrategy
     {
         DecreaseItemSellIn(item);
 
-        if (IsItemSellable(item))
-        {
-            item.Quality += 1;
-        }
-        else
-        {
-            item.Quality += 2;
-        }
+        if (IsItemSellable(item)) item.Quality += 1;
+        else item.Quality += 2;
         
         if (IsQualityGreaterOrEqualToMaxQuality(item)) SetQualityToMaxium(item);
     }

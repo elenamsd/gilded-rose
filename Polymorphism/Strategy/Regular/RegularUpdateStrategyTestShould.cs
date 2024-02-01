@@ -1,7 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace csharp.Polymorphism.Strategy;
+namespace csharp.Polymorphism.Strategy.Regular;
 
 [TestFixture]
 public class RegularUpdateStrategyTestShould
@@ -11,9 +11,9 @@ public class RegularUpdateStrategyTestShould
     {
         Item item = new() { Name = "Irrelevant-name", Quality = 5, SellIn = 5 };
         Item expected = new() { Name = "Irrelevant-name", Quality = 4, SellIn = 4 };
-        var regularUpdateStrategy = new RegularUpdateUpdateStrategy();
+        var strategy = new RegularUpdateUpdateStrategy();
         
-        regularUpdateStrategy.UpdateQuality(item);
+        strategy.UpdateQuality(item);
 
         item.Should().BeEquivalentTo(expected);
     }
@@ -23,9 +23,9 @@ public class RegularUpdateStrategyTestShould
     {
         Item item = new() { Name = "Irrelevant-name", Quality = 0, SellIn = 0 };
         Item expected = new() { Name = "Irrelevant-name", Quality = 0, SellIn = -1 };
-        var regularUpdateStrategy = new RegularUpdateUpdateStrategy();
+        var strategy = new RegularUpdateUpdateStrategy();
         
-        regularUpdateStrategy.UpdateQuality(item);
+        strategy.UpdateQuality(item);
 
         item.Should().BeEquivalentTo(expected);
     }
@@ -35,9 +35,9 @@ public class RegularUpdateStrategyTestShould
     {
         Item item = new() { Name = "Irrelevant-name", Quality = 4, SellIn = 0 };
         Item expected = new() { Name = "Irrelevant-name", Quality = 2, SellIn =-1  };
-        var regularUpdateStrategy = new RegularUpdateUpdateStrategy();
+        var strategy = new RegularUpdateUpdateStrategy();
 
-        regularUpdateStrategy.UpdateQuality(item);
+        strategy.UpdateQuality(item);
 
         item.Should().BeEquivalentTo(expected);
     }

@@ -1,6 +1,4 @@
-using csharp.Polymorphism.Models;
-
-namespace csharp.Polymorphism.Strategy;
+namespace csharp.Polymorphism.Strategy.Conjured;
 
 public class ConjuredUpdateUpdateStrategy : BaseUpdateStrategy
 {
@@ -10,13 +8,7 @@ public class ConjuredUpdateUpdateStrategy : BaseUpdateStrategy
             
         if (IsQualityLowerOrEqualToMinimumQuality(item)) return;
             
-        if (IsItemSellable(item))
-        {
-            item.Quality -= 2;
-        }
-        else
-        {
-            item.Quality -= 4;
-        }
+        if (IsItemSellable(item)) item.Quality -= 2;
+        else item.Quality -= 4;
     }
 }

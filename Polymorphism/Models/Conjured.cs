@@ -1,4 +1,4 @@
-using csharp.Polymorphism.Strategy;
+using csharp.Polymorphism.Strategy.Conjured;
 
 namespace csharp.polymorphism.Models;
 public class Conjured: ItemWrapper

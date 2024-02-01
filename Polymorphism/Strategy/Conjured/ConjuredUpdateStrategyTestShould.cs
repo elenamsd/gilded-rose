@@ -1,7 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace csharp.Polymorphism.Strategy;
+namespace csharp.Polymorphism.Strategy.Conjured;
 
 [TestFixture]
 public class ConjuredUpdateStrategyTestShould
@@ -11,9 +11,9 @@ public class ConjuredUpdateStrategyTestShould
     {
         Item item = new() { Name = "conjured-irrelevant-name", Quality = 10, SellIn = 10 };
         Item expected = new() { Name = "conjured-irrelevant-name", Quality = 8, SellIn = 9 };
-        var conjuredUpdateStrategy = new ConjuredUpdateUpdateStrategy();
+        var strategy = new ConjuredUpdateUpdateStrategy();
         
-        conjuredUpdateStrategy.UpdateQuality(item);
+        strategy.UpdateQuality(item);
 
         item.Should().BeEquivalentTo(expected);
     }
@@ -23,9 +23,9 @@ public class ConjuredUpdateStrategyTestShould
     {
         Item item = new() { Name = "conjured-irrelevant-name", Quality = 10, SellIn = 0 };
         Item expected = new() { Name = "conjured-irrelevant-name", Quality = 6, SellIn = -1 };
-        var conjuredUpdateStrategy = new ConjuredUpdateUpdateStrategy();
+        var strategy = new ConjuredUpdateUpdateStrategy();
         
-        conjuredUpdateStrategy.UpdateQuality(item);
+        strategy.UpdateQuality(item);
 
         item.Should().BeEquivalentTo(expected);
     }

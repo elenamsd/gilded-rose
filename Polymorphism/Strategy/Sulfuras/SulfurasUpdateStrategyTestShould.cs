@@ -1,7 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace csharp.Polymorphism.Strategy;
+namespace csharp.Polymorphism.Strategy.Sulfuras;
 
 [TestFixture]
 public class SulfurasUpdateStrategyTestShould
@@ -11,9 +11,9 @@ public class SulfurasUpdateStrategyTestShould
     {
         Item item = new() { Name = "Irrelevant-name", Quality = 80, SellIn = 10 };
         Item expected = new() { Name = "Irrelevant-name", Quality = 80, SellIn = 10 };
-        var sulfurasUpdateStrategy = new SulfurasUpdateUpdateStrategy();
+        var strategy = new SulfurasUpdateUpdateStrategy();
         
-        sulfurasUpdateStrategy.UpdateQuality(item);
+        strategy.UpdateQuality(item);
 
         item.Should().BeEquivalentTo(expected);
     }

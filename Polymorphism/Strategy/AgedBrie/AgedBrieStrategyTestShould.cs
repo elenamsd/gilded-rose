@@ -1,7 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace csharp.Polymorphism.Strategy;
+namespace csharp.Polymorphism.Strategy.AgedBrie;
 
 [TestFixture]
 public class AgedBrieStrategyTestShould
@@ -11,9 +11,9 @@ public class AgedBrieStrategyTestShould
     {
         Item item = new() { Name = "Aged Brie", Quality = 30, SellIn = 10 };
         Item expected = new() { Name = "Aged Brie", Quality = 31, SellIn = 9 };
-        var agedBrieUpdateStrategy = new AgedBrieUpdateUpdateStrategy();
+        var strategy = new AgedBrieUpdateUpdateStrategy();
 
-        agedBrieUpdateStrategy.UpdateQuality(item);
+        strategy.UpdateQuality(item);
 
         item.Should().BeEquivalentTo(expected);
     }
@@ -23,9 +23,9 @@ public class AgedBrieStrategyTestShould
     {
         Item item = new() { Name = "Aged Brie", Quality = 30, SellIn = 10 };
         Item expected = new() { Name = "Aged Brie", Quality = 31, SellIn = 9 };
-        var agedBrieUpdateStrategy = new AgedBrieUpdateUpdateStrategy();
+        var strategy = new AgedBrieUpdateUpdateStrategy();
 
-        agedBrieUpdateStrategy.UpdateQuality(item);
+        strategy.UpdateQuality(item);
 
         item.Should().BeEquivalentTo(expected);
     }
@@ -35,9 +35,9 @@ public class AgedBrieStrategyTestShould
     {
         Item item = new() { Name = "Aged Brie", Quality = 50, SellIn = 10 };
         Item expected = new() { Name = "Aged Brie", Quality = 50, SellIn = 9 };
-        var agedBrieUpdateStrategy = new AgedBrieUpdateUpdateStrategy();
+        var strategy = new AgedBrieUpdateUpdateStrategy();
 
-        agedBrieUpdateStrategy.UpdateQuality(item);
+        strategy.UpdateQuality(item);
         
         item.Should().BeEquivalentTo(expected);
     }
@@ -47,9 +47,9 @@ public class AgedBrieStrategyTestShould
     {
         Item item = new() { Name = "Aged Brie", Quality = 49, SellIn = -1 };
         Item expected = new() { Name = "Aged Brie", Quality = 50, SellIn = -2 };
-        var agedBrieUpdateStrategy = new AgedBrieUpdateUpdateStrategy();
+        var strategy = new AgedBrieUpdateUpdateStrategy();
 
-        agedBrieUpdateStrategy.UpdateQuality(item);
+        strategy.UpdateQuality(item);
         
         item.Should().BeEquivalentTo(expected);
     }
