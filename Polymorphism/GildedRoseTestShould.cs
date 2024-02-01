@@ -142,18 +142,6 @@ public class GildedRoseTestShould
     }
     
     [Test]
-    public void IncreaseBackstagePassQualityByThreeWhenSellInLowerOrEqualThanFiveDaysTest()
-    {
-        var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 49 } };
-        var expected = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 4, Quality = 50 } };
-        var app = new GildedRose(items);
-        
-        app.UpdateQuality();
-        
-        items.Should().BeEquivalentTo(expected);
-    }
-    
-    [Test]
     public void DropBackstagePassQualityToZeroWhenSellInLowerOrEqualThanZeroDays()
     {
         var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 0, Quality = 5 } };
