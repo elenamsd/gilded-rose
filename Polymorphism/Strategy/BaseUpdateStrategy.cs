@@ -11,15 +11,20 @@ public abstract class BaseUpdateStrategy: IUpdateQualityStrategy
     {
         item.Quality = MinQuality;
     }
-
-    protected static bool IsQualityGreaterThanMinimumQuality(Item item)
+    
+    protected static void SetQualityToMaxium(Item item)
     {
-        return item.Quality > MinQuality;
+        item.Quality = MaxQuality;
     }
 
-    protected static bool IsQualityLowerThanMaxQuality(Item item)
+    protected static bool IsQualityLowerOrEqualToMinimumQuality(Item item)
     {
-        return item.Quality < MaxQuality;
+        return item.Quality <= MinQuality;
+    }
+
+    protected static bool IsQualityGreaterOrEqualToMaxQuality(Item item)
+    {
+        return item.Quality >= MaxQuality;
     }
 
     protected static void DecreaseItemSellIn(Item item)

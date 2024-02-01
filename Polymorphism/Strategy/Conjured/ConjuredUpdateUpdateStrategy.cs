@@ -6,17 +6,17 @@ public class ConjuredUpdateUpdateStrategy : BaseUpdateStrategy
 {
     public override void UpdateQuality(Item item)
     {
-        if (IsQualityGreaterThanMinimumQuality(item))
+        DecreaseItemSellIn(item);
+            
+        if (IsQualityLowerOrEqualToMinimumQuality(item)) return;
+            
+        if (IsItemSellable(item))
         {
             item.Quality -= 2;
         }
-                
-        DecreaseItemSellIn(item);
-                
-        if (IsItemSellable(item)) return;
-                
-        if (!IsQualityGreaterThanMinimumQuality(item)) return;
-                    
-        item.Quality -= 2;
+        else
+        {
+            item.Quality -= 4;
+        }
     }
 }

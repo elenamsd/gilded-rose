@@ -6,16 +6,11 @@ public class RegularUpdateUpdateStrategy : BaseUpdateStrategy
 {
     public override void UpdateQuality(Item item)
     {
-        if (IsQualityGreaterThanMinimumQuality(item))
-        {
-            item.Quality -= 1;
-        }
-
         DecreaseItemSellIn(item);
+        
+        if (IsQualityLowerOrEqualToMinimumQuality(item)) return;
 
-        if (!IsItemSellable(item) && IsQualityGreaterThanMinimumQuality(item))
-        {
-            item.Quality -= 1;
-        }
+        if (IsItemSellable(item)) item.Quality -= 1;
+        else item.Quality -= 2;
     }
 }

@@ -6,18 +6,17 @@ public class AgedBrieUpdateUpdateStrategy : BaseUpdateStrategy
 {
     public override void UpdateQuality(Item item)
     {
-        if (IsQualityLowerThanMaxQuality(item))
-        {
-            item.Quality += 1;
-        }
-                    
         DecreaseItemSellIn(item);
-                    
-        if (IsItemSellable(item)) return;
-                    
-        if (IsQualityLowerThanMaxQuality(item))
+
+        if (IsItemSellable(item))
         {
             item.Quality += 1;
         }
+        else
+        {
+            item.Quality += 2;
+        }
+        
+        if (IsQualityGreaterOrEqualToMaxQuality(item)) SetQualityToMaxium(item);
     }
 }

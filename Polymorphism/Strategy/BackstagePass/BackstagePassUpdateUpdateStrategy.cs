@@ -6,27 +6,24 @@ public class BackstagePassUpdateUpdateStrategy : BaseUpdateStrategy
 {
     public override void UpdateQuality(Item item)
     {
-        if (IsQualityLowerThanMaxQuality(item))
-        {
-            item.Quality += 1;
-                        
-            var isItemSellInGreaterThanElevenDays = item.SellIn < 11;
-            if (isItemSellInGreaterThanElevenDays && IsQualityLowerThanMaxQuality(item))
-            {
-                item.Quality += 1;
-            }
-
-            var isItemSellInGreaterThanSixDays = item.SellIn < 6;
-            if (isItemSellInGreaterThanSixDays && IsQualityLowerThanMaxQuality(item))
-            {
-                item.Quality += 1;
-            }
-        }
-
         DecreaseItemSellIn(item);
-                    
-        if (IsItemSellable(item)) return;
-                    
-        DropQualityToMinimum(item);
+        
+        switch (item.SellIn)
+        {
+            case >= 10:
+                item.Quality += 1;
+                break;
+            case >= 5 and < 10:
+                item.Quality += 2;
+                break;
+            case < 5:
+                item.Quality += 3;
+                break;
+        }
+            
+        if (IsQualityGreaterOrEqualToMaxQuality(item)) SetQualityToMaxium(item);
+        
+        var itemIsNotSellable = !IsItemSellable(item);
+        if (itemIsNotSellable) DropQualityToMinimum(item);
     }
 }
