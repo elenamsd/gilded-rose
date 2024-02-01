@@ -11,7 +11,7 @@ public class ConjuredUpdateStrategyTestShould
     {
         Item item = new() { Name = "conjured-irrelevant-name", Quality = 10, SellIn = 10 };
         Item expected = new() { Name = "conjured-irrelevant-name", Quality = 8, SellIn = 9 };
-        var conjuredUpdateStrategy = new ConjuredUpdateStrategy();
+        var conjuredUpdateStrategy = new ConjuredUpdateUpdateStrategy();
         
         conjuredUpdateStrategy.UpdateQuality(item);
 

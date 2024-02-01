@@ -2,7 +2,7 @@ using csharp.Polymorphism.Models;
 
 namespace csharp.Polymorphism.Strategy;
 
-public class SulfurasUpdateStrategy : BaseStrategy
+public class SulfurasUpdateUpdateStrategy : BaseUpdateStrategy
 {
     public override void UpdateQuality(Item item)
     {

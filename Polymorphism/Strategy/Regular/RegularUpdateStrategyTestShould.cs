@@ -11,7 +11,7 @@ public class RegularUpdateStrategyTestShould
     {
         Item item = new() { Name = "Irrelevant-name", Quality = 5, SellIn = 5 };
         Item expected = new() { Name = "Irrelevant-name", Quality = 4, SellIn = 4 };
-        var regularUpdateStrategy = new RegularUpdateStrategy();
+        var regularUpdateStrategy = new RegularUpdateUpdateStrategy();
         
         regularUpdateStrategy.UpdateQuality(item);
 
@@ -23,7 +23,7 @@ public class RegularUpdateStrategyTestShould
     {
         Item item = new() { Name = "Irrelevant-name", Quality = 0, SellIn = 0 };
         Item expected = new() { Name = "Irrelevant-name", Quality = 0, SellIn = -1 };
-        var regularUpdateStrategy = new RegularUpdateStrategy();
+        var regularUpdateStrategy = new RegularUpdateUpdateStrategy();
         
         regularUpdateStrategy.UpdateQuality(item);
 
@@ -35,7 +35,7 @@ public class RegularUpdateStrategyTestShould
     {
         Item item = new() { Name = "Irrelevant-name", Quality = 4, SellIn = 0 };
         Item expected = new() { Name = "Irrelevant-name", Quality = 2, SellIn =-1  };
-        var regularUpdateStrategy = new RegularUpdateStrategy();
+        var regularUpdateStrategy = new RegularUpdateUpdateStrategy();
 
         regularUpdateStrategy.UpdateQuality(item);
 

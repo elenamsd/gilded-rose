@@ -5,7 +5,7 @@ namespace csharp.polymorphism.Models;
 
 public class BackstagePass:  ItemWrapper
 {
-    public BackstagePass() : base(new BackstagePassUpdateStrategy())
+    public BackstagePass() : base(new BackstagePassUpdateUpdateStrategy())
     {
     }
 }

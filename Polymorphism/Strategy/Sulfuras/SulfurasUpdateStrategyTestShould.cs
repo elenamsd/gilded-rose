@@ -11,7 +11,7 @@ public class SulfurasUpdateStrategyTestShould
     {
         Item item = new() { Name = "Irrelevant-name", Quality = 80, SellIn = 10 };
         Item expected = new() { Name = "Irrelevant-name", Quality = 80, SellIn = 10 };
-        SulfurasUpdateStrategy sulfurasUpdateStrategy = new SulfurasUpdateStrategy();
+        var sulfurasUpdateStrategy = new SulfurasUpdateUpdateStrategy();
         
         sulfurasUpdateStrategy.UpdateQuality(item);
 

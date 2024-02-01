@@ -10,6 +10,19 @@ public class GildedRose
 
     public GildedRose(IList<Item> items)
     {
+        InitializeWrappedItemsFrom(items);
+    }
+    
+    public void UpdateQuality()
+    {
+        foreach (var item in _items)
+        {
+            item.UpdateQuality(item.Item);
+        }
+    }
+
+    private void InitializeWrappedItemsFrom(IList<Item> items)
+    {
         foreach (var item in items)
         {
             bool isConjuredItem = item.Name.Contains("conjured", System.StringComparison.CurrentCultureIgnoreCase);
@@ -26,7 +39,7 @@ public class GildedRose
             
         }
     }
-
+    
     private static ItemWrapper CreateWrappedItemFromItem(Item item)
     {
         const string agedBrie = "Aged Brie";
@@ -40,13 +53,5 @@ public class GildedRose
             _ => new Regular { Item = item }
         };
         return itemToAdd;
-    }
-
-    public void UpdateQuality()
-    {
-        foreach (var item in _items)
-        {
-            item.UpdateQuality(item.Item);
-        }
     }
 }

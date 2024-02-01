@@ -9,9 +9,9 @@ public class AgedBrieStrategyTestShould
     [Test]
     public void IncreaseQualityByOneWhenItGetsOlder()
     {
-        Item item = new() { Name = "Irrelevant-name", Quality = 30, SellIn = 10 };
-        Item expected = new() { Name = "Irrelevant-name", Quality = 31, SellIn = 9 };
-        var agedBrieUpdateStrategy = new AgedBrieUpdateStrategy();
+        Item item = new() { Name = "Aged Brie", Quality = 30, SellIn = 10 };
+        Item expected = new() { Name = "Aged Brie", Quality = 31, SellIn = 9 };
+        var agedBrieUpdateStrategy = new AgedBrieUpdateUpdateStrategy();
 
         agedBrieUpdateStrategy.UpdateQuality(item);
 
@@ -21,9 +21,9 @@ public class AgedBrieStrategyTestShould
     [Test]
     public void IncreaseQualityByTwoWhenSellInDatePassed()
     {
-        Item item = new() { Name = "Irrelevant-name", Quality = 30, SellIn = 10 };
-        Item expected = new() { Name = "Irrelevant-name", Quality = 31, SellIn = 9 };
-        var agedBrieUpdateStrategy = new AgedBrieUpdateStrategy();
+        Item item = new() { Name = "Aged Brie", Quality = 30, SellIn = 10 };
+        Item expected = new() { Name = "Aged Brie", Quality = 31, SellIn = 9 };
+        var agedBrieUpdateStrategy = new AgedBrieUpdateUpdateStrategy();
 
         agedBrieUpdateStrategy.UpdateQuality(item);
 
@@ -33,9 +33,9 @@ public class AgedBrieStrategyTestShould
     [Test]
     public void NotIncreaseQualityOverMaxQuality()
     {
-        Item item = new() { Name = "Irrelevant-name", Quality = 50, SellIn = 10 };
-        Item expected = new() { Name = "Irrelevant-name", Quality = 50, SellIn = 9 };
-        var agedBrieUpdateStrategy = new AgedBrieUpdateStrategy();
+        Item item = new() { Name = "Aged Brie", Quality = 50, SellIn = 10 };
+        Item expected = new() { Name = "Aged Brie", Quality = 50, SellIn = 9 };
+        var agedBrieUpdateStrategy = new AgedBrieUpdateUpdateStrategy();
 
         agedBrieUpdateStrategy.UpdateQuality(item);
         
@@ -45,9 +45,9 @@ public class AgedBrieStrategyTestShould
     [Test]
     public void NotIncreaseQualityOverMaxQualityWhenSellInDatePassed()
     {
-        Item item = new() { Name = "Irrelevant-name", Quality = 49, SellIn = -1 };
-        Item expected = new() { Name = "Irrelevant-name", Quality = 50, SellIn = -2 };
-        var agedBrieUpdateStrategy = new AgedBrieUpdateStrategy();
+        Item item = new() { Name = "Aged Brie", Quality = 49, SellIn = -1 };
+        Item expected = new() { Name = "Aged Brie", Quality = 50, SellIn = -2 };
+        var agedBrieUpdateStrategy = new AgedBrieUpdateUpdateStrategy();
 
         agedBrieUpdateStrategy.UpdateQuality(item);
         

@@ -5,6 +5,6 @@ namespace csharp.polymorphism.Models;
 
 public class AgedBrie:  ItemWrapper
 {
-    public AgedBrie() : base(new AgedBrieUpdateStrategy())
+    public AgedBrie() : base(new AgedBrieUpdateUpdateStrategy())
     { }
 }

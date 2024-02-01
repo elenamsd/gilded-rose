@@ -12,7 +12,7 @@ public class BackstagePassUpdateStrategyTestShould
     {
         var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 5 };
         var expected = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 14, Quality = 6 };
-        var backstagePassUpdateStrategy = new BackstagePassUpdateStrategy();
+        var backstagePassUpdateStrategy = new BackstagePassUpdateUpdateStrategy();
         
         backstagePassUpdateStrategy.UpdateQuality(item);
         
@@ -25,7 +25,7 @@ public class BackstagePassUpdateStrategyTestShould
         var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 10, Quality = 5 };
         var expected = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 9, Quality = 7 };
 
-        var backstagePassUpdateStrategy = new BackstagePassUpdateStrategy();
+        var backstagePassUpdateStrategy = new BackstagePassUpdateUpdateStrategy();
         
         backstagePassUpdateStrategy.UpdateQuality(item);
         
@@ -38,7 +38,7 @@ public class BackstagePassUpdateStrategyTestShould
         var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 5 };
         var expected = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 4, Quality = 8 };
         
-        var backstagePassUpdateStrategy = new BackstagePassUpdateStrategy();
+        var backstagePassUpdateStrategy = new BackstagePassUpdateUpdateStrategy();
         
         backstagePassUpdateStrategy.UpdateQuality(item);
         
@@ -51,9 +51,21 @@ public class BackstagePassUpdateStrategyTestShould
         var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 0, Quality = 5 };
         var expected = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = -1, Quality = 0 };
 
-        var backstagePassUpdateStrategy = new BackstagePassUpdateStrategy();
+        var backstagePassUpdateStrategy = new BackstagePassUpdateUpdateStrategy();
         
         backstagePassUpdateStrategy.UpdateQuality(item);
+        
+        item.Should().BeEquivalentTo(expected);
+    }
+
+    [Test]
+    public void NotIncreaseQualityOverMaxQuality()
+    {
+        Item item = new() { Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 50, SellIn = 10 };
+        Item expected = new() { Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 50, SellIn = 9 };
+        var agedBrieUpdateStrategy = new AgedBrieUpdateUpdateStrategy();
+
+        agedBrieUpdateStrategy.UpdateQuality(item);
         
         item.Should().BeEquivalentTo(expected);
     }

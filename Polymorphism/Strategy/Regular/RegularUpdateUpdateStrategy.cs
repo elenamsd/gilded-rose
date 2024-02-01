@@ -2,7 +2,7 @@ using csharp.Polymorphism.Models;
 
 namespace csharp.Polymorphism.Strategy;
 
-public class RegularUpdateStrategy : BaseStrategy
+public class RegularUpdateUpdateStrategy : BaseUpdateStrategy
 {
     public override void UpdateQuality(Item item)
     {
