@@ -1,6 +1,6 @@
 namespace csharp.Polymorphism.Strategy.Conjured;
 
-public class ConjuredUpdateUpdateStrategy : BaseUpdateStrategy
+public class ConjuredUpdateQuality : BaseUpdateQuality
 {
     public override void UpdateQuality(Item item)
     {

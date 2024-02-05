@@ -2,7 +2,7 @@ using csharp.Polymorphism.Models;
 
 namespace csharp.Polymorphism.Strategy;
 
-public abstract class BaseUpdateStrategy: IUpdateQualityStrategy
+public abstract class BaseUpdateQuality: IUpdateQuality
 {
     private const int MaxQuality = 50;
     private const int MinQuality = 0;

@@ -1,6 +1,6 @@
 namespace csharp.Polymorphism.Strategy.BackstagePass;
 
-public class BackstagePassUpdateUpdateStrategy : BaseUpdateStrategy
+public class BackstagePassUpdateQuality : BaseUpdateQuality
 {
     public override void UpdateQuality(Item item)
     {

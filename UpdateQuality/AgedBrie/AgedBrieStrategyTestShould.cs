@@ -11,7 +11,7 @@ public class AgedBrieStrategyTestShould
     {
         Item item = new() { Name = "Aged Brie", Quality = 30, SellIn = 10 };
         Item expected = new() { Name = "Aged Brie", Quality = 31, SellIn = 9 };
-        var strategy = new AgedBrieUpdateUpdateStrategy();
+        var strategy = new AgedBrieUpdateQuality();
 
         strategy.UpdateQuality(item);
 
@@ -23,7 +23,7 @@ public class AgedBrieStrategyTestShould
     {
         Item item = new() { Name = "Aged Brie", Quality = 30, SellIn = 10 };
         Item expected = new() { Name = "Aged Brie", Quality = 31, SellIn = 9 };
-        var strategy = new AgedBrieUpdateUpdateStrategy();
+        var strategy = new AgedBrieUpdateQuality();
 
         strategy.UpdateQuality(item);
 
@@ -35,7 +35,7 @@ public class AgedBrieStrategyTestShould
     {
         Item item = new() { Name = "Aged Brie", Quality = 50, SellIn = 10 };
         Item expected = new() { Name = "Aged Brie", Quality = 50, SellIn = 9 };
-        var strategy = new AgedBrieUpdateUpdateStrategy();
+        var strategy = new AgedBrieUpdateQuality();
 
         strategy.UpdateQuality(item);
         
@@ -47,7 +47,7 @@ public class AgedBrieStrategyTestShould
     {
         Item item = new() { Name = "Aged Brie", Quality = 49, SellIn = -1 };
         Item expected = new() { Name = "Aged Brie", Quality = 50, SellIn = -2 };
-        var strategy = new AgedBrieUpdateUpdateStrategy();
+        var strategy = new AgedBrieUpdateQuality();
 
         strategy.UpdateQuality(item);
         

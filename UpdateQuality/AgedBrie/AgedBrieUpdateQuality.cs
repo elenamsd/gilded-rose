@@ -1,6 +1,6 @@
 namespace csharp.Polymorphism.Strategy.AgedBrie;
 
-public class AgedBrieUpdateUpdateStrategy : BaseUpdateStrategy
+public class AgedBrieUpdateQuality : BaseUpdateQuality
 {
     public override void UpdateQuality(Item item)
     {

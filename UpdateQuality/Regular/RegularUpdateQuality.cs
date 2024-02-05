@@ -1,6 +1,6 @@
 namespace csharp.Polymorphism.Strategy.Regular;
 
-public class RegularUpdateUpdateStrategy : BaseUpdateStrategy
+public class RegularUpdateQuality : BaseUpdateQuality
 {
     public override void UpdateQuality(Item item)
     {
